@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ScrollView, View, Text, TextInput, Button, Switch, TouchableOpacity, StyleSheet, Platform, Image } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Picker } from '@react-native-picker/picker';
+import { launchImageLibrary } from 'react-native-image-picker';
+
 
 const CadastroEmpreendimento = () => {
   const [nome, setNome] = useState('');
@@ -53,6 +55,22 @@ const CadastroEmpreendimento = () => {
   const renderFotos = () => fotos.map((uri, idx) => (
     <Image key={idx} source={{ uri }} style={styles.thumb} />
   ));
+
+  const pickImage = () => {
+    launchImageLibrary({ mediaType: 'photo', selectionLimit: 1 }, response => {
+      if (
+        !response.didCancel &&
+        !response.errorCode &&
+        response.assets &&
+        response.assets.length > 0
+      ) {
+        const uri = response.assets[0].uri;
+        if (uri) {
+          setFotos(prev => [...prev, uri]);
+        }
+      }
+    });
+  };
 
   const onDateChange = (event: any, date?: Date) => {
     setShowDatePicker(Platform.OS === 'ios');
@@ -221,10 +239,9 @@ const CadastroEmpreendimento = () => {
       {/* Fotos */}
       <Text style={styles.label}>Fotos</Text>
       <View style={styles.photoContainer}>{renderFotos()}</View>
-      {fotos.length < 10 && <Button title="+ Adicionar Foto" onPress={() => {
-        // TODO: integrar picker de fotos
-        setFotos([...fotos, '']);
-      }} />}
+      {fotos.length < 10 && (
+        <Button title="+ Adicionar Foto" onPress={pickImage} />
+      )}
 
       {/* Vídeos externos */}
       <Text style={styles.label}>Vídeos Extras (Links)</Text>
