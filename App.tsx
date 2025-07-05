@@ -1,22 +1,72 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
+
+import LoginScreen from './Login';
 import CadastroEmpreendimento from './CadastroEmpreendimento';
-import Login from './Login';
+import { Image, StyleSheet } from 'react-native';
+import { DrawerContentComponentProps } from '@react-navigation/drawer';
+
+const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
+interface CustomDrawerContentProps extends DrawerContentComponentProps { }
+
+function CustomDrawerContent(props: CustomDrawerContentProps) {
+  return (
+    <DrawerContentScrollView {...props}>
+      <Image
+        source={require('./logo.png')}
+        style={styles.logo}
+        resizeMode="contain"
+      />
+
+      <DrawerItemList {...props} />
+    </DrawerContentScrollView>
+  );
+}
+
+function DrawerNavigator() {
+  return (
+
+    <Drawer.Navigator initialRouteName="Empreendimentos"
+      drawerContent={props => <CustomDrawerContent {...props} />}
+    >
+      <Drawer.Screen name="Empreendimentos" component={CadastroEmpreendimento} />
+      <Drawer.Screen name="Evento" component={CadastroEmpreendimento} />
+      <Drawer.Screen name="Municipio" component={CadastroEmpreendimento} />
+      <Drawer.Screen name="Roteiro" component={CadastroEmpreendimento} />
+      <Drawer.Screen name="Região" component={CadastroEmpreendimento} />
+    </Drawer.Navigator>
+  );
+}
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <CadastroEmpreendimento />
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="MainDrawer"
+          component={DrawerNavigator}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  logo: {
+    width: 180,
+    height: 160,
+    marginBottom: 10,
+    alignSelf: 'center',
+  }
 });

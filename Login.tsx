@@ -2,22 +2,32 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native'; // <<< MUDANÇA 1: Importa o hook de navegação
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  type RootStackParamList = {
+    Home: undefined;
+    MainDrawer: undefined;
+  };
+
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>(); // <<< MUDANÇA 2: Pega o "controle remoto" da navegação
+
+  const handleEntrar = () => {
+    navigation.navigate('MainDrawer');
+  };
 
   return (
     <View style={styles.container}>
-      {/* Logo */}
       <Image
         source={require('./logo.png')}
         style={styles.logo}
         resizeMode="contain"
       />
 
-      {/* Usuário */}
       <View style={styles.inputContainer}>
         <Ionicons name="person-outline" size={20} color="#888" style={styles.icon} />
         <TextInput
@@ -48,8 +58,7 @@ export default function Login() {
         </TouchableOpacity>
       </View>
 
-      {/* Botão */}
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleEntrar}>
         <Text style={styles.buttonText}>ENTRAR NO SISTEMA</Text>
       </TouchableOpacity>
 
