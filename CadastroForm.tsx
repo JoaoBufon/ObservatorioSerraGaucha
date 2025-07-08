@@ -50,7 +50,7 @@ const CadastroForm = () => {
   });
 
   const tiposEmpresa = ['Hospedagem', 'Atrativo', 'Gastronomia', 'Outro'];
-  const roteiroOptions = [ /* fetched from API */ ];
+  const roteiroOptions = [ /* fetched from API */];
 
   const renderFotos = () => fotos.map((uri, idx) => (
     <Image key={idx} source={{ uri }} style={styles.thumb} />
@@ -78,7 +78,7 @@ const CadastroForm = () => {
   };
 
   const formatCnpj = (text: string) => {
-    const digits = text.replace(/\D/g, '').slice(0,14);
+    const digits = text.replace(/\D/g, '').slice(0, 14);
     return digits
       .replace(/(\d{2})(?=\d)/, '$1.')
       .replace(/(\d{2}\.\d{3})(?=\d)/, '$1.')
@@ -87,7 +87,7 @@ const CadastroForm = () => {
   };
 
   const formatCpf = (text: string) => {
-    const digits = text.replace(/\D/g, '').slice(0,11);
+    const digits = text.replace(/\D/g, '').slice(0, 11);
     return digits
       .replace(/(\d{3})(?=\d)/, '$1.')
       .replace(/(\d{3}\.\d{3})(?=\d)/, '$1.')
@@ -95,7 +95,7 @@ const CadastroForm = () => {
   };
 
   const formatPhone = (text: string) => {
-    const digits = text.replace(/\D/g, '').slice(0,11);
+    const digits = text.replace(/\D/g, '').slice(0, 11);
     return digits
       .replace(/(\d{2})(?=\d)/, '($1) ')
       .replace(/(\(\d{2}\) \d{5})(?=\d)/, '$1-');
@@ -148,16 +148,16 @@ const CadastroForm = () => {
 
       {/* Tipo de empreendimento obrigatório */}
       <Text style={styles.label}>Tipo de Empreendimento *</Text>
-        <Picker
-            selectedValue={tipoEmpresa}
-            onValueChange={setTipoEmpresa}
-            style={styles.input}
-          >
-            <Picker.Item label="Hospedagem" value="Hospedagem" />
-            <Picker.Item label="Atrativo" value="Atrativo" />
-            <Picker.Item label="Gastronomia" value="Gastronomia" />
-            <Picker.Item label="Outro" value="Outro" />
-          </Picker>
+      <Picker
+        selectedValue={tipoEmpresa}
+        onValueChange={setTipoEmpresa}
+        style={styles.input}
+      >
+        <Picker.Item label="Hospedagem" value="Hospedagem" />
+        <Picker.Item label="Atrativo" value="Atrativo" />
+        <Picker.Item label="Gastronomia" value="Gastronomia" />
+        <Picker.Item label="Outro" value="Outro" />
+      </Picker>
       {/* CADASTUR - Obrigatoriedade */}
       <View style={styles.row}>
         <Text style={styles.label}>CADASTUR - Obrigatório?</Text>
@@ -194,7 +194,7 @@ const CadastroForm = () => {
       <TextInput style={styles.input} value={gestorNome} onChangeText={setGestorNome} />
       {/* demais campos do gestor */}
 
-       <Text style={styles.label}>CPF do Gestor *</Text>
+      <Text style={styles.label}>CPF do Gestor *</Text>
       <TextInput
         style={styles.input}
         value={gestorCpf}
@@ -306,13 +306,13 @@ const CadastroForm = () => {
       {/* Roteiros */}
       <Text style={styles.label}>Roteiros</Text>
       <Picker
-            selectedValue={roteirosSelecionados}
-            onValueChange={setRoteirosSelecionados}
-            style={styles.input}
-          >
-            <Picker.Item label="roteiro1" value="roteiro1" />
-            <Picker.Item label="roteiro2" value="roteiro2" />
-          </Picker>
+        selectedValue={roteirosSelecionados}
+        onValueChange={setRoteirosSelecionados}
+        style={styles.input}
+      >
+        <Picker.Item label="roteiro1" value="roteiro1" />
+        <Picker.Item label="roteiro2" value="roteiro2" />
+      </Picker>
 
       {/* Dias e Horários de Atendimento */}
       <Text style={styles.label}>Dias e Horários de Atendimento</Text>
@@ -349,14 +349,53 @@ const CadastroForm = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { padding: 16, backgroundColor: '#fff' },
-  label: { fontWeight: 'bold', marginTop: 12 },
-  input: { borderWidth: 1, borderColor: '#ccc', borderRadius: 4, padding: 8, marginTop: 4 },
-  row: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 12 },
-  mapContainer: { height: 200, marginTop: 8 },
-  map: { flex: 1 },
-  thumb: { width: 80, height: 80, marginRight: 8, marginTop: 8 },
-  photoContainer: { flexDirection: 'row', flexWrap: 'wrap' },
+  container: {
+    padding: 20,
+    backgroundColor: '#f9f9f9',
+  },
+  label: {
+    fontWeight: '600',
+    fontSize: 14,
+    marginTop: 16,
+    marginBottom: 4,
+    color: '#333',
+  },
+  input: {
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    fontSize: 14,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 16,
+  },
+  mapContainer: {
+    height: 200,
+    marginTop: 12,
+    borderRadius: 8,
+    overflow: 'hidden',
+  },
+  map: {
+    flex: 1,
+  },
+  thumb: {
+    width: 80,
+    height: 80,
+    marginRight: 8,
+    marginTop: 8,
+    borderRadius: 6,
+  },
+  photoContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 8,
+  },
 });
 
 export default CadastroForm;
