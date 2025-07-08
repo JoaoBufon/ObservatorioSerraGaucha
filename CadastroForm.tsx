@@ -5,7 +5,7 @@ import { Picker } from '@react-native-picker/picker';
 import { launchImageLibrary } from 'react-native-image-picker';
 
 
-const CadastroEmpreendimento = () => {
+const CadastroForm = () => {
   const [nome, setNome] = useState('');
   const [razaoSocial, setRazaoSocial] = useState('');
   const [nomeFantasia, setNomeFantasia] = useState('');
@@ -359,4 +359,4 @@ const styles = StyleSheet.create({
   photoContainer: { flexDirection: 'row', flexWrap: 'wrap' },
 });
 
-export default CadastroEmpreendimento;
+export default CadastroForm;

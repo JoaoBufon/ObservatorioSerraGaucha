@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 
 import LoginScreen from './Login';
-import CadastroEmpreendimento from './CadastroEmpreendimento';
+import CadastroForm from './CadastroForm';
 import { Image, StyleSheet } from 'react-native';
 import { DrawerContentComponentProps } from '@react-navigation/drawer';
 
@@ -34,11 +34,11 @@ function DrawerNavigator() {
     <Drawer.Navigator initialRouteName="Empreendimentos"
       drawerContent={props => <CustomDrawerContent {...props} />}
     >
-      <Drawer.Screen name="Empreendimentos" component={CadastroEmpreendimento} />
-      <Drawer.Screen name="Evento" component={CadastroEmpreendimento} />
-      <Drawer.Screen name="Municipio" component={CadastroEmpreendimento} />
-      <Drawer.Screen name="Roteiro" component={CadastroEmpreendimento} />
-      <Drawer.Screen name="Região" component={CadastroEmpreendimento} />
+      <Drawer.Screen name="Empreendimentos" component={CadastroForm} />
+      <Drawer.Screen name="Evento" component={CadastroForm} />
+      <Drawer.Screen name="Municipio" component={CadastroForm} />
+      <Drawer.Screen name="Roteiro" component={CadastroForm} />
+      <Drawer.Screen name="Região" component={CadastroForm} />
     </Drawer.Navigator>
   );
 }
